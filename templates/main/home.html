@@ -1,0 +1,41 @@
+{% extends 'main/base.html' %}
+
+
+{% block stylsheet %} {% endblock stylsheet %}
+
+{% block title %} Home {% endblock title %}
+
+
+{% block content%}
+{% load static %}
+    <div class="container">
+        <h1>Home Page</h1>
+        <div class="links">
+            <h3>Links :</h3>
+            <ul class="link">
+                <li><a href="{% url 'main:create' %}">Create Todolist</a></li>
+            </ul>
+        </div>
+        <br>
+        <br>
+        <hr>
+        {% for obj in objs%}
+            <ul>
+                <li><a href="{% url 'main:detail' obj.id %}">{{obj.id}}</a></li>
+                <li>{{obj.titre}}</li>
+                <li>{{obj.description}}</li>
+                <li>{{obj.is_doing}}</li>
+                <li><a href="{% url 'main:delete' obj.id %}">delete</a></li>
+                <li><a href="{% url 'main:update' obj.id %}">update</a></li>
+            </ul>
+            <hr>
+            <hr>
+        {% empty%}
+            No Todolist yet
+            <br> Create <a href="{% url 'main:create' %}">New One</a>  
+        {% endfor %}      
+    </div>
+{% endblock content %}
+
+
+{% block JavaScript %} {% endblock JavaScript %}
