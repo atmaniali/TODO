@@ -68,3 +68,12 @@ def update(request, todo_id):
         return redirect(request.path)
     context['form'] = form
     return render(request, template_name, context)
+
+from rest_framework import viewsets
+
+from .serializers import *
+from .models import *
+
+class TodoViewSet(viewsets.ModelViewSet):
+    queryset = Todo.objects.all().order_by('titre')
+    serializer_class = TodoSerializer
